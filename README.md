@@ -4,7 +4,10 @@
 [Joseph Newman](https://github.com/Joseph-M-Newman)<br/>
 
 ## Description
-This website is designed and built to help assist the Esports organization in keeping track of all sub-category games hosted by CSUMB esports. The website will display information on the organization, the team rosters, vods, clips, and much more
+This website is designed and built to help assist the Esports organization in keeping track of all sub-category games hosted by CSUMB esports. 
+
+The website will display information on the organization, the team rosters, vods, clips, and much more.
+
 The games that are/will be supported as of 11/5/2021 are the following: 
 ```
 Rocket League
