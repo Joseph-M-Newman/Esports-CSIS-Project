@@ -1,2 +1,2 @@
 
-![Mockup](mockup.jpg)
+![Mockup](mockup.png)
