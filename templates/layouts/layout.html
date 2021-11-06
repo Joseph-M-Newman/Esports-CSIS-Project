@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<title>CodeName Ball Chaser</title>
-		<link rel="stylesheet" href="{{ url_for('static',filename='css/nav.css') }}" />
+		<link rel="stylesheet" href="{{ url_for('static',filename='css/nav.css') }}"/>
 		<!-- jQuery -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 		<!-- Bootstrap CSS -->
@@ -16,9 +16,11 @@
 	</head>
 	<body class="bg-light">
 		<div class="container-fluid">
+			<div id="NavBar">
 			<a href='/'>Home</a>
 			<a href='/RocketLeague'>Rocket League</a>
 			<a href='/LeagueofLegends'>League of Legends</a>
+			</div>
 		{% block content %} {% endblock %}
 		</div>
 	</body>
