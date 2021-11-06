@@ -17,6 +17,14 @@ def RocketLeague():
 def League():
     return flask.render_template("LeagueofLegends.html")
 
+@app.route("/admin")
+def admin():
+    return flask.render_template("admin.html")
+
+@app.route("/login")
+def login():
+    return flask.render_template("login.html")
+
 # === run the server == default port localhost:5000 === (put on heroku to use site live)  
 if __name__ == "__main__":
     app.run(debug=True)
