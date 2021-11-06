@@ -1,0 +1,24 @@
+{% extends "layouts/layout.html" %}
+{% block head %} {{super()}} 
+
+{% endblock %} 
+
+<body>
+	{% block nav %} {{super()}} {% endblock %} 
+    {% block content %}
+    
+    <div>
+        <div id="Align-Center">
+            Username:<input type="text" id="user" name="username"></br>
+             </br>
+             </br>
+            Password: <input type="text" id="pass" name="password" required minlength="4" maxlength="9"> 
+             </br>
+             </br>
+             <button id="Login">Login</button>
+        </div>
+    </div>
+
+    {% endblock %}
+</body>
+</html>
