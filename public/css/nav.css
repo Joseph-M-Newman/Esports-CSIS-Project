@@ -12,3 +12,8 @@
 #Align-Center{
     text-align: center;
 }
+GameContent{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
