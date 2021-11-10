@@ -1,7 +1,7 @@
 import sqlite3
 import hashlib
 
-DB_NAME = "project2-db"
+DB_NAME = "BallChaser"
 
 # user constants
 CREATE_USER_TABLE_QUERY = """
