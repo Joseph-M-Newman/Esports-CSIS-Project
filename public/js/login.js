@@ -22,6 +22,8 @@ async function login(){
     if(res.err){
         $("#userInput").text(res.err);
     } else {
+        sessionStorage.setItem("user",username)
+        sessionStorage.setItem("pass",password)
         location.href = "/"
     }
 }
