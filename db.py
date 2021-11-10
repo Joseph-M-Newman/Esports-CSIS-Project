@@ -241,6 +241,7 @@ def populate():
 
 	print("Adding user")
 	conn.add_user("joseph","password",False)
+	conn.add_user("test","test",True)
 
 if __name__ == "__main__":
 	c = DatabaseConnection()
