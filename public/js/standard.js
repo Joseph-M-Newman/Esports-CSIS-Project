@@ -5,9 +5,11 @@ $(document).ready(function(){
         password = sessionStorage.getItem("pass")
        $("#LOGINB").hide()
        $("#LogOut").show()
+       $("#createAccount").hide()
     }else {
         $("#LOGINB").show()
         $("#LogOut").hide()
+        $("#createAccount").show()
     }
 
     $("#LogOut").click(() =>	{Logout()});
@@ -17,4 +19,5 @@ $(document).ready(function(){
 function Logout(){
     sessionStorage.removeItem("user");
     sessionStorage.removeItem("pass");
+    location.href = '/login';
 }

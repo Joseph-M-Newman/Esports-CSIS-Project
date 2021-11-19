@@ -1,0 +1,27 @@
+{% extends "layouts/account.html" %}
+{% block head %} {{super()}} 
+
+{% endblock %} 
+
+<body>
+	{% block nav %} {{super()}} {% endblock %} 
+    {% block content %}
+    
+    <div>
+        <div id="Align-Center">
+            <p id="uInput"></p>
+            Username: <input type="text" id="u" name="username"></br>
+            </br>
+            </br>
+            Password: <input type="password" id="p" name="password" required minlength="4" maxlength="9"> 
+            </br>
+            </br>
+            <button onclick="createAccount()" id="CreateAccount">Create Account</button>
+            </br>
+            
+        </div>
+    </div>
+
+    {% endblock %}
+</body>
+</html>

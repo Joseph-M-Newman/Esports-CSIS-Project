@@ -32,6 +32,19 @@ def admin():
 @app.route("/login")
 def login():
     return flask.render_template("login.html")
+@app.route("/createAccount")
+def createAccount():
+    return flask.render_template("createAccount.html")
+
+@app.route("/api/adduser", methods=["POST","GET"])
+def api_addUser():
+    j = request.get_json()
+    c = DatabaseConnection()
+    response = c.add_user(j["username"], j["password"], False)
+    if response == True:
+        return {"msg": "Accounted Created"}, 200
+    else:
+        return {"msg": "Account already exists!"}, 400
 
 @app.route("/api/login", methods=["POST"])
 def api_login():
