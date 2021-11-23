@@ -35,7 +35,7 @@ def login():
 @app.route("/createAccount")
 def createAccount():
     return flask.render_template("createAccount.html")
-
+#add user api
 @app.route("/api/adduser", methods=["POST","GET"])
 def api_addUser():
     j = request.get_json()
@@ -45,7 +45,18 @@ def api_addUser():
         return {"msg": "Accounted Created"}, 200
     else:
         return {"msg": "Account already exists!"}, 400
+# add team api 
+@app.route("/api/addteam")
+def api_addteam():
+    j = request.get_json()
+    c = DatabaseConnection()
+    response = c.add_team(j["teamname"],j["teamsize"],j["teammembers"])
 
+    if response == True:
+        return {"msg": "Team added"}, 200
+    else: 
+        return {"msg": "Team name already Exists!"}, 400
+#login authentication
 @app.route("/api/login", methods=["POST"])
 def api_login():
     j = request.get_json()

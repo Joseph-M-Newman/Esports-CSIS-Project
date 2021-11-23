@@ -9,20 +9,38 @@ CREATE TABLE IF NOT EXISTS user (
 	id			INTEGER PRIMARY KEY AUTOINCREMENT,
 	username	TEXT UNIQUE NOT NULL,
 	pass	TEXT NOT NULL,
+	team     TEXT,
 	admin		BOOLEAN NOT NULL
 );
 """
+CREATE_TEAM_TABLE_QUERY = """
+CREATE TABLE IF NOT EXISTS teams (
+	id			INTEGER PRIMARY KEY AUTOINCREMENT,
+	teamname		TEXT NOT NULL,
+	teamsize		INTEGER,
+	teammembers		TEXT
+);
+"""
+
 DROP_USER_TABLE_QUERY = " DROP TABLE IF EXISTS user"
+DROP_TEAM_TABLE_QUERY = "DROP TABLE IF EXISTS teams"
 
 INSERT_USER_QUERY	= "INSERT INTO user (username, pass, admin) VALUES (?, ?, ?)"
 DELETE_USER_QUERY	= "DELETE FROM user WHERE username = ?"
+
+INSERT_TEAM_QUERY   = "INSERT INTO teams (teamname, teamsize, teammembers) VALUES (?,?,?)"
+DELETE_TEAM_QUERY   = "DELETE FROM teams WHERE teamname = ?"
 
 SELECT_USER_BY_USERNAME_QUERY	= "SELECT * FROM user WHERE username = ?"
 SELECT_USER_BY_ID_QUERY	= "SELECT * FROM user WHERE id = ?"
 SELECT_USERS_QUERY	= "SELECT * FROM user"
 
+SELECT_TEAM_BY_TEAMANEM_QUERY   = "SELECT * FROM teams WHERE teamname = ?"
+SELECT_TEAM_BY_ID_QUERY    = "SELECT * FROM teams WHERE id = ?"
+SELECT_TEAM_QUERY   = "SELECT * FROM teams"
 
 
+UPDATE_TEAMS_QUERY   = "UPDATE teams SET teamname = ?, teamsize = ? , teammembers = ? WHERE id =?"
 UPDATE_USER_QUERY	= "UPDATE user SET username = ?, pass = ? WHERE id = ?"
 
 # list constants
@@ -41,19 +59,6 @@ DELETE_LIST_QUERY		= "DELETE FROM list WHERE id = ?"
 SELECT_LIST_QUERY		= "SELECT * FROM list WHERE id = ?"
 SELECT_USER_LISTS_QUERY	= "SELECT * FROM list WHERE userid = ?"
 SELECT_LISTS_QUERY		= "SELECT * FROM list"
-
-# item constants
-CREATE_ITEM_TABLE_QUERY = """
-CREATE TABLE IF NOT EXISTS item (
-	id		INTEGER PRIMARY KEY AUTOINCREMENT,
-	listid	INTEGER NOT NULL,
-	label	TEXT NOT NULL,
-	descr	TEXT,
-	img		TEXT,
-	url		TEXT,
-	price	FLOAT
-);
-"""
 
 class DatabaseConnection:
 	
@@ -124,7 +129,6 @@ class DatabaseConnection:
 		self.conn.execute(INSERT_USER_QUERY, (username, password, admin))
 		self.conn.commit()
 		return True
-
 
 	def update_user(self, username, newusername, newpassword):
 
@@ -221,6 +225,36 @@ class DatabaseConnection:
 		self.conn.commit()
 		return True
 
+############################################################
+#		TEAMS FUNCTIONS
+############################################################
+def add_teams(self, teamname, teamsize, teammembers):
+		if self.get_team(teamname):
+			return False
+		self.conn.execute(INSERT_TEAM_QUERY, (teamname, teamsize, teammembers))
+		self.conn.commit()
+		return True
+
+def get_team(self, teamname = "", teamid = 0):
+		tup = ()
+		if not teamname:
+			if not teamid:
+				return None
+			else:
+				tup = self.conn.execute(SELECT_TEAM_BY_ID_QUERY, (teamid,)).fetchone()
+		else:
+			tup = self.conn.execute(SELECT_TEAM_BY_USERNAME_QUERY, (teamname,)).fetchone()
+
+		if not tup:
+			return None
+
+		team = {}
+		team["id"] = int(tup[0])
+		team["teamname"] = str(tup[1])
+		team["teamsize"] = bool(tup[3])
+		team["teammembers"] = bool(tup[3])
+		return team
+	
 """
 DO NOT CALL THIS FUNCTION
 Function to test if everything is working right.
